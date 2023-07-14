@@ -9,8 +9,10 @@ ENV LIBRARY_PATH=$LIBRARY_PATH:/usr/local/cuda/lib64
 
 ADD . /cv_test
 WORKDIR /cv_test
-RUN unzip opencv-4.8.0.zip
-RUN unzip opencv_contrib-4.8.0.zip
+RUN wget https://github.com/opencv/opencv/archive/refs/tags/4.8.0.zip
+RUN unzip 4.8.0.zip
+RUN wget -O opencv_extra_4.8.0.zip https://github.com/opencv/opencv_contrib/archive/refs/tags/4.8.0.zip
+RUN unzip opencv_extra_4.8.0.zip
 RUN cd opencv-4.8.0 && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=RELEASE \
     -DCMAKE_INSTALL_PREFIX=/usr/local \
     -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.8.0/modules .. \
